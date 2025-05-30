@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Person Info using call()</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eaf4fc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 300px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .output {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Person Info</h2>
+    <input type="text" id="name" placeholder="Enter name" />
+    <input type="number" id="age" placeholder="Enter age" />
+    <br />
+    <button onclick="showPersonInfo()">Show Info</button>
+    <div class="output" id="output"></div>
+  </div>
+
+  <script>
+    function personInfo() {
+      document.getElementById("output").textContent = `Name: ${this.name}, Age: ${this.age}`;
+    }
+
+    function showPersonInfo() {
+      const nameInput = document.getElementById("name").value.trim();
+      const ageInput = parseInt(document.getElementById("age").value.trim());
+
+      if (!nameInput || isNaN(ageInput)) {
+        document.getElementById("output").textContent = "Please enter valid name and age.";
+        return;
+      }
+
+      const person = {
+        name: nameInput,
+        age: ageInput
+      };
+
+      personInfo.call(person);
+    }
+  </script>
+</body>
+</html>
