@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Deep vs Shallow Copy</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #ffffff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 1em;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    pre {
+      background: #f7f7f7;
+      padding: 10px;
+      border-radius: 6px;
+      text-align: left;
+      white-space: pre-wrap;
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Deep Clone Object (Using JSON Methods)</h2>
+    <p>Enter an object in JSON format:</p>
+    <textarea id="inputObject" rows="4">{ "name": "Alice", "hobbies": ["reading", "traveling"] }</textarea>
+    <button onclick="deepCloneObject()">Deep Clone & Modify</button>
+
+    <div class="section-title">Original Object:</div>
+    <pre id="originalOutput"></pre>
+
+    <div class="section-title">Cloned & Modified Object:</div>
+    <pre id="clonedOutput"></pre>
+  </div>
+
+  <script>
+    function deepClone(obj) {
+      return JSON.parse(JSON.stringify(obj));
+    }
+
+    function deepCloneObject() {
+      const inputText = document.getElementById("inputObject").value.trim();
+
+      try {
+        const original = JSON.parse(inputText);
+        const clone = deepClone(original);
+
+        // Modify the clone to demonstrate independence
+        if (Array.isArray(clone.hobbies)) {
+          clone.hobbies.push("coding");
+        }
+
+        // Display the results
+        document.getElementById("originalOutput").textContent = JSON.stringify(original, null, 2);
+        document.getElementById("clonedOutput").textContent = JSON.stringify(clone, null, 2);
+      } catch (err) {
+        document.getElementById("originalOutput").textContent = "Invalid JSON input!";
+        document.getElementById("clonedOutput").textContent = "";
+      }
+    }
+  </script>
+</body>
+</html>
