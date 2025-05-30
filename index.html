@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function createStudent(name, age, course) {
+  const student = {
+    name: name,
+    age: age,
+    course: course
+  };
+
+  const jsonString = JSON.stringify(student, null, 2);
+  console.log(jsonString);
+}
+
+// Example usage:
+createStudent("Alice", 22, "Computer Science");
+
+    </script>
+</body>
+</html>
